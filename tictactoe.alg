@@ -184,9 +184,9 @@ inicio
 	limpatela()
 	escreval( "  1   2   3" )
 	escreval( "A ", table[1,1] ," | ", table[1,2] ," | ", table[1,3] )
-	escreval( "-----------" )
+	escreval( " -----------" )
 	escreval( "B ", table[2,1] ," | ", table[2,2] ," | ", table[2,3] )
-	escreval( "------------" )
+	escreval( " -----------" )
 	escreval( "C ", table[3,1] ," | ", table[3,2] ," | ", table[3,3] )
 	
 	se exit entao

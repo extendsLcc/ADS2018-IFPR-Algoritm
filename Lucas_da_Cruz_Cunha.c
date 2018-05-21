@@ -5,6 +5,14 @@ Var
 	index, 	a, b, c , cor, 	x, y , result,	contador, fatorial, num ,	soma : inteiro
 	control: logico
 
+	//Vars tic-tac-toe
+	table: vetor [1..3,1..3] de caractere
+	line: vetor[1..3] de caractere
+	player, linha: caractere
+	row, colunm: inteiro
+	counter, tie: inteiro
+	exit: logico
+	
 inicio
 	  
 	OpcaoPrincipal := "9"
@@ -25,7 +33,7 @@ inicio
 			escreval("| (2) Laco Para                       |")
 			escreval("| (3) Laco Enquanto                   |")
 			escreval("| (4) Laco Repita                     |")
-			escreval("| (5) Proximo Assunto                 |")
+			escreval("| (5) Array/Vetor e Matriz            |")
 			escreval("| (0) Sair do Programa                |")
 			escreval("=======================================")
 		
@@ -45,7 +53,7 @@ inicio
 			
 				repita
 				
-					// =====   INICIO SUBMENU ESTRUTURA DE SELEÇÃO
+					//! =====   INICIO SUBMENU ESTRUTURA DE SELEÇÃO
 				
 					se control entao
 					
@@ -54,7 +62,7 @@ inicio
 						escreval("|     MENU Estruturas de Seleção      |")
 						escreval("=======================================")
 						escreval("| (1) Maior_2_Numeros_v2              |")
-						escreval("| (2) SomarCS                         |")
+						escreval("| (2) Par ou Impar                    |")
 						escreval("| (3) Menu_cores                      |")
 						escreval("| (0) Voltar ao menu Principal        |")
 						escreval("=======================================")
@@ -75,7 +83,7 @@ inicio
 						
 						caso "1"
 						
-							// =====   INICIO Maior_2_Numeros_v2  
+							//! =====   INICIO Maior_2_Numeros_v2  
 							
 							escreva( "Digite um número: " )
 							leia(a)
@@ -100,29 +108,30 @@ inicio
 								
 							fimse
 							
-							// =====   FIM Maior_2_Numeros_v2  
+							//! =====   FIM Maior_2_Numeros_v2  
 						
 						caso "2"
 						
-							// =====  INICIO SomarCS
+							//! =====  INICIO Par ou Impar
 						
-							escreva( "Digite o 1ª número: " )
+							escreva( "Digite um número: " )
 							leia(a)
-							escreva( "Digite o 2ª número: " )
-							leia(b)
-							c := a + b
 							
-							se( c > 10 ) entao
+							se( a % 2 = 0 ) entao
 							
-								escreval( "A soma dos números é: " , c )
+								escreval( "O número digitado é par" )
 								
+							senao
+							
+								escreval( "O número digitado é impar" )
+							
 							fimse
 							
-							// =====  FIM SomarCS
+							//! =====  FIM Par ou Impar
 						
 						caso "3"
 						
-							// =====  INICIO Menu_cores
+							//! =====  INICIO Menu_cores
 						
 							escreval( " ( 1 ) Verde" )
 							escreval( " ( 2 ) Vermelho" )
@@ -149,7 +158,7 @@ inicio
 									
 							fimescolha
 
-							// =====  FIM Menu_cores
+							//! =====  FIM Menu_cores
 						
 						outrocaso
 						
@@ -199,11 +208,11 @@ inicio
 				ate ( OpcaoSubMenu = "3" )
 				
 				control := verdadeiro
-				// =====   FIM SUBMENU ESTRUTURA DE SELEÇÃO
+				//! =====   FIM SUBMENU ESTRUTURA DE SELEÇÃO
 				
 			caso "2"
 						
-				// =====   INICIO SUBMENU LAÇO DE REPETIÇÃO PARA
+				//! =====   INICIO SUBMENU LAÇO DE REPETIÇÃO PARA
 					
 				repita
 					
@@ -235,7 +244,7 @@ inicio
 						
 						caso "1"
 						
-							// =====   INICIO Tabuada completa  
+							//! =====   INICIO Tabuada completa  
 							
 							para x de 0 ate 10 passo 1 faca
 							
@@ -252,11 +261,11 @@ inicio
 								
 							fimpara
 							
-							// =====   FIM Tabuada completa 
+							//! =====   FIM Tabuada completa 
 						
 						caso "2"
 						
-							// =====  INICIO Fatorial
+							//! =====  INICIO Fatorial
 						
 							contador := 1
 							fatorial := 1
@@ -282,11 +291,11 @@ inicio
 							
 							escreval("O fatorial de ",num," equivale a ", fatorial )
 							
-							// =====  FIM Fatorial
+							//! =====  FIM Fatorial
 						
 						caso "3"
 						
-							// =====  INICIO Somatoria 100 primeiros numeros
+							//! =====  INICIO Somatoria 100 primeiros numeros
 						
 							index := 1
 							soma := 0
@@ -299,7 +308,7 @@ inicio
 							
 							escreval("A somatória dos 100 primeiros números positivos é ",soma )
 
-							// =====  FIM Somatoria 100 primeiros numeros
+							//! =====  FIM Somatoria 100 primeiros numeros
 						
 						outrocaso
 						
@@ -350,11 +359,11 @@ inicio
 				
 				control := verdadeiro
 				
-				// ====   FIM SUBMENU LAÇO DE REPETIÇÃO PARA
+				//! ====   FIM SUBMENU LAÇO DE REPETIÇÃO PARA
 				
 			caso "3"
 			
-				// =====   INICIO SUBMENU LAÇO DE REPETIÇÃO ENQUANTO
+				//! =====   INICIO SUBMENU LAÇO DE REPETIÇÃO ENQUANTO
 				
 				repita
 				
@@ -386,7 +395,7 @@ inicio
 						
 						caso "1"
 						
-							// =====   INICIO Tabuada completa  
+							//! =====   INICIO Tabuada completa  
 							
 							x := 0
 							x := 0
@@ -409,11 +418,11 @@ inicio
 								
 							fimenquanto
 							
-							// =====   FIM Tabuada completa 
+							//! =====   FIM Tabuada completa 
 						
 						caso "2"
 						
-							// =====  INICIO Fatorial
+							//! =====  INICIO Fatorial
 						
 							contador := 1
 							fatorial := 1
@@ -439,11 +448,11 @@ inicio
 							fimenquanto
 								
 							escreval("O fatorial de ",num," equivale a ", fatorial )
-							// =====  FIM Fatorial
+							//! =====  FIM Fatorial
 						
 						caso "3"
 						
-							// =====  INICIO Somatoria 100 primeiros numeros
+							//! =====  INICIO Somatoria 100 primeiros numeros
 						
 							index := 0
 							soma := 0
@@ -457,7 +466,7 @@ inicio
 							
 							escreval("A somatória dos 100 primeiros números positivos é ",soma )
 
-							// =====  FIM Somatoria 100 primeiros numeros
+							//! =====  FIM Somatoria 100 primeiros numeros
 						
 						outrocaso
 						
@@ -507,11 +516,11 @@ inicio
 				ate ( OpcaoSubMenu = "3" )
 				
 				control := verdadeiro
-				// ====   FIM SUBMENU LAÇO DE REPETIÇÃO ENQUANTO
+				//! ====   FIM SUBMENU LAÇO DE REPETIÇÃO ENQUANTO
 				
 			caso "4"
 			
-				// =====   INICIO SUBMENU LAÇO DE REPETIÇÃO REPITA
+				//! =====   INICIO SUBMENU LAÇO DE REPETIÇÃO REPITA
 				
 				repita
 				
@@ -543,7 +552,7 @@ inicio
 						
 						caso "1"
 						
-							// =====   INICIO Tabuada completa  
+							//! =====   INICIO Tabuada completa  
 								
 							x := 0
 							x := 0
@@ -566,11 +575,11 @@ inicio
 							
 							ate ( x > 10 )
 							
-							// =====   FIM Tabuada completa 
+							//! =====   FIM Tabuada completa 
 						
 						caso "2"
 						
-							// =====  INICIO Fatorial
+							//! =====  INICIO Fatorial
 						
 							contador := 1
 							fatorial := 1
@@ -598,11 +607,11 @@ inicio
 							
 							escreval("O fatorial de ",num," equivale a ", fatorial )
 							
-							// =====  FIM Fatorial
+							//! =====  FIM Fatorial
 						
 						caso "3"
 						
-							// =====  INICIO Somatoria 100 primeiros numeros
+							//! =====  INICIO Somatoria 100 primeiros numeros
 						
 							index := 0
 							soma := 0
@@ -616,7 +625,7 @@ inicio
 							
 							escreval("A somatória dos 100 primeiros números positivos é ",soma )
 
-							// =====  FIM Somatoria 100 primeiros numeros
+							//! =====  FIM Somatoria 100 primeiros numeros
 						
 						outrocaso
 						
@@ -666,11 +675,300 @@ inicio
 				ate( OpcaoSubMenu = "3" )
 				
 				control := verdadeiro
-				// ====   FIM SUBMENU LAÇO DE REPETIÇÃO REPITA
+				//! ====   FIM SUBMENU LAÇO DE REPETIÇÃO REPITA
 				
 			caso "5"
-			
-				escreval("(5) Proximo Assunto")
+
+				//! =====   INICIO SUBMENU ARRAY
+				
+				repita
+				
+					se control entao
+					
+						limpatela()
+						escreval("=======================================")
+						escreval("|              MENU ARRAY             |")
+						escreval("=======================================")
+						escreval("| (1) Tic-Tac-Toe                     |")
+						escreval("| (2) TODO                            |")
+						escreval("| (3) TODO                            |")
+						escreval("| (0) Voltar ao menu Principal        |")
+						escreval("=======================================")
+						
+					fimse
+						
+					control := verdadeiro
+					escreva("Selecione uma opcao do menu: ")
+					leia(OpcaoSubMenu)
+					
+					escolha OpcaoSubMenu
+						
+						caso "0"
+						
+							// exit submenu
+							OpcaoSubMenu := "3"
+							control := falso
+						
+						caso "1"
+						
+							//! =====   INICIO Tic-Tac-Toe
+							
+							player := "O"
+							line[1] := "A"
+							line[2] := "B"
+							line[3] := "C"
+							tie := 0
+							exit := falso
+							
+							para row de 1 ate 3 passo 1 faca
+								
+								para colunm de 1 ate 3 passo 1 faca
+								
+									table[row,colunm] := " "
+									
+								fimpara
+								
+							fimpara
+							
+							repita
+							
+								limpatela()
+								escreval( "  1   2   3" )
+								escreval( "A ", table[1,1] ," | ", table[1,2] ," | ", table[1,3] )
+								escreval( " ------------" )
+								escreval( "B ", table[2,1] ," | ", table[2,2] ," | ", table[2,3] )
+								escreval( " ------------" )
+								escreval( "C ", table[3,1] ," | ", table[3,2] ," | ", table[3,3] )
+								
+								repita
+								
+									escreval("")
+									escreval("Jogador ", player )
+									escreval("Digite o número da coluna que deseja marcar")
+									leia( colunm )
+									escreval("Digite a letra da linha que deseja marcar")
+									leia( linha )
+									
+									para counter de 1 ate 3 passo 1 faca
+									
+										se linha = line[counter] entao
+										
+											row := counter
+										
+										fimse
+									
+									fimpara
+									
+									se table[row, colunm] = " " entao
+									
+										table[row, colunm] := player
+										interrompa
+									
+									senao
+									
+										escreval("Posição já ocupada, por favor, selecione outra posição!")
+									
+									fimse
+								
+								ate falso
+								
+								// checar condição de vitória
+								
+								counter := 0
+								
+								// colunas
+								para colunm de 1 ate 3 passo 1 faca
+								
+									para row de 1 ate 3 passo 1 faca
+										
+										se table[ row, colunm] =  player entao
+										
+											counter := counter + 1
+										
+										fimse
+									
+									fimpara
+									
+									se counter = 3 entao
+									
+										exit := verdadeiro
+										
+									fimse
+									
+									counter := 0
+								
+								fimpara
+								
+								counter := 0
+								
+								// linhas
+								para row de 1 ate 3 passo 1 faca
+								
+									para colunm de 1 ate 3 passo 1 faca
+										
+										se table[ row, colunm] =  player entao
+										
+											counter := counter + 1
+										
+										fimse
+									
+									fimpara
+									
+									se counter = 3 entao
+									
+										exit := verdadeiro
+										
+									fimse
+									
+									counter := 0
+								
+								fimpara
+								
+								// 1 to 3 colunm - 1 to 3 diagonal
+								counter := 0
+								
+								para row de 1 ate 3 passo 1 faca
+								
+									se table[ row, row] =  player entao
+									
+										counter := counter + 1
+									
+									fimse
+								
+								fimpara
+								
+								se counter = 3 entao
+								
+									exit := verdadeiro
+									
+								fimse
+								
+								// 3 to 1 colunm - 3 to 1 diagonal
+								counter := 0
+								
+								para row de 1 ate 3 passo 1 faca
+								
+									se table[ 4 - row, row] =  player entao
+									
+										counter := counter + 1
+									
+									fimse
+								
+								fimpara
+								
+								se counter = 3 entao
+								
+									exit := verdadeiro
+									
+								fimse
+								
+								tie := tie + 1
+								
+								se nao( exit ) entao
+								
+									se tie >= 9 entao
+								
+										interrompa
+								
+									fimse
+								
+									se player = "O" entao
+								
+										player := "X"
+									
+									senao
+								
+										player := "O"
+								
+									fimse
+								
+								fimse
+								
+							ate exit
+
+							limpatela()
+							escreval( "  1   2   3" )
+							escreval( "A ", table[1,1] ," | ", table[1,2] ," | ", table[1,3] )
+							escreval( "-----------" )
+							escreval( "B ", table[2,1] ," | ", table[2,2] ," | ", table[2,3] )
+							escreval( "------------" )
+							escreval( "C ", table[3,1] ," | ", table[3,2] ," | ", table[3,3] )
+							
+							se exit entao
+							
+								escreval( "Jogador ", player, " venceu " )
+							
+							senao
+							
+								escreval( "Empate" )
+								
+							fimse
+							
+							//! =====   FIM Tic-Tac-Toe
+						
+						caso "2"
+						
+							//! =====  INICIO Fatorial
+						
+								
+							
+							//! =====  FIM Fatorial
+						
+						caso "3"
+						
+							//! =====  INICIO Somatoria 100 primeiros numeros
+						
+							//! =====  FIM Somatoria 100 primeiros numeros
+						
+						outrocaso
+						
+							escreval("Opção Invalida!")
+							control := falso
+					
+					fimescolha
+				
+					se control entao
+					
+						escreval("")
+						escreval("|         Selecione uma das opções                |")
+						escreval("|(1) Voltar para Submenu Laço de repetição REPITA |")
+						escreval("|(2) Voltar para menu principal                   |")
+						escreval("|(3) Sair do programa                             |")
+						
+						repita
+							
+							leia(OpcaoSubMenu)
+							
+							escolha OpcaoSubMenu
+							
+								caso "1"
+								
+									control := verdadeiro
+								
+								caso "2"
+									
+									OpcaoSubMenu := "3"
+									
+								caso "3"
+								
+									OpcaoPrincipal := "0"
+									
+								outrocaso
+								
+									OpcaoSubMenu := "-1"
+									escreval( "Opção Invalida" )
+									escreva( "por favor selecione uma das opções disponível: " )
+									
+							fimescolha
+						
+						ate( (OpcaoSubMenu = "1") ou (OpcaoSubMenu = "2") ou (OpcaoSubMenu = "3") )
+						
+					fimse
+					
+				ate( OpcaoSubMenu = "3" )
+				
+				control := verdadeiro
+				//! ====   FIM SUBMENU ARRAY
 				
 			outrocaso
 			
@@ -686,4 +984,4 @@ inicio
 	
 fimalgoritmo
 
-	// ===================  FIM MAIN 
+	//! ===================  FIM MAIN 
