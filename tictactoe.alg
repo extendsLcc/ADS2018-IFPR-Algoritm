@@ -4,7 +4,7 @@ var
 	line: vetor[1..3] de caractere
 	player, linha: caractere
 	row, colunm: inteiro
-	counter: inteiro
+	counter, tie: inteiro
 	exit: logico
 inicio
 	
@@ -12,6 +12,7 @@ inicio
 	line[1] := "A"
 	line[2] := "B"
 	line[3] := "C"
+	tie := 0
 	exit := falso
 	
 	para row de 1 ate 3 passo 1 faca
@@ -156,14 +157,25 @@ inicio
 			
 		fimse
 		
+		tie := tie + 1
 		
-		se player = "O" entao
+		se nao( exit ) entao
 		
-			player := "X"
+			se tie >= 9 entao
+		
+				interrompa
+		
+			fimse
+		
+			se player = "O" entao
+		
+				player := "X"
 			
-		senao
+			senao
 		
-			player := "O"
+				player := "O"
+		
+			fimse
 		
 		fimse
 		
@@ -176,6 +188,15 @@ inicio
 	escreval( "B ", table[2,1] ," | ", table[2,2] ," | ", table[2,3] )
 	escreval( "------------" )
 	escreval( "C ", table[3,1] ," | ", table[3,2] ," | ", table[3,3] )
-	escreval( "Jogador ", player, " venceu " )
+	
+	se exit entao
+	
+		escreval( "Jogador ", player, " venceu " )
+	
+	senao
+	
+		escreval( "Empate" )
+		
+	fimse
 	
 fimalgoritmo
