@@ -54,7 +54,7 @@ inicio
 			
 			fimpara
 			
-			se table[row, colunm] = " " entao
+			se table[row, colunm] <> "X" e table[row, colunm] <> "O" entao
 			
 				table[row, colunm] := player
 				interrompa
