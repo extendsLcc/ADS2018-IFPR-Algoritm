@@ -1,17 +1,29 @@
 Algoritmo "TrabalhoAvaliativo"
-// Versao 1.2 - Menu Principal
+// Autor : Lucas da Cruz Cunha
+// Data : 23/05/2018
 Var
 	OpcaoPrincipal, OpcaoSubMenu: caractere
 	index, 	a, b, c , cor, 	x, y , result,	contador, fatorial, num ,	soma : inteiro
 	control: logico
 
 	//Vars tic-tac-toe
-	table: vetor [1..3,1..3] de caractere
-	line: vetor[1..3] de caractere
-	player, linha: caractere
-	row, colunm: inteiro
-	counter, tie: inteiro
-	exit: logico
+	position: vetor[1..9] de caractere
+	i, z, tie : inteiro // contador
+	player : caractere
+	controle: logico
+	
+	//Vars NumSorting
+	list: vetor[1..10] de inteiro
+	listOrdenada: vetor[1..10] de inteiro
+	input: caractere
+	//i, z, index,
+	tmp, ammount: inteiro
+	
+	//Vars CPFcheck
+	cpf: vetor[1..11] de inteiro
+	cpfChar: caractere
+    //i, position, 
+	posit, valid: inteiro
 	
 inicio
 	  
@@ -690,8 +702,8 @@ inicio
 						escreval("|              MENU ARRAY             |")
 						escreval("=======================================")
 						escreval("| (1) Tic-Tac-Toe                     |")
-						escreval("| (2) TODO                            |")
-						escreval("| (3) TODO                            |")
+						escreval("| (2) Ordenar números                 |")
+						escreval("| (3) Validar CPF                     |")
 						escreval("| (0) Voltar ao menu Principal        |")
 						escreval("=======================================")
 						
@@ -713,212 +725,342 @@ inicio
 						
 							//! =====   INICIO Tic-Tac-Toe
 							
-							player := "O"
-							line[1] := "A"
-							line[2] := "B"
-							line[3] := "C"
-							tie := 0
-							exit := falso
+							player := "X"
+							tie:= 0
 							
-							para row de 1 ate 3 passo 1 faca
-								
-								para colunm de 1 ate 3 passo 1 faca
-								
-									table[row,colunm] := " "
-									
-								fimpara
-								
+							para i de 1 ate 9 passo 1 faca
+							
+								 position[i] := Numpcarac(i)
+							
 							fimpara
 							
 							repita
 							
+								se player = "X" entao
+								
+									player := "O"
+									
+								senao
+								
+									player := "X"
+								
+								fimse
+							
 								limpatela()
-								escreval( "  1   2   3" )
-								escreval( "A ", table[1,1] ," | ", table[1,2] ," | ", table[1,3] )
-								escreval( " ------------" )
-								escreval( "B ", table[2,1] ," | ", table[2,2] ," | ", table[2,3] )
-								escreval( " ------------" )
-								escreval( "C ", table[3,1] ," | ", table[3,2] ," | ", table[3,3] )
-								
+								escreval( position[7] ," | ", position[8] ," | ", position[9] )
+								escreval( "-----------" )
+								escreval( position[4] ," | ", position[5] ," | ", position[6] )
+								escreval( "------------" )
+								escreval( position[1] ," | ", position[2] ," | ", position[3] )
+							
+								i := 0
+								controle := falso
 								repita
-								
-									escreval("")
-									escreval("Jogador ", player )
-									escreval("Digite o número da coluna que deseja marcar")
-									leia( colunm )
-									escreval("Digite a letra da linha que deseja marcar")
-									leia( linha )
 									
-									para counter de 1 ate 3 passo 1 faca
+									escreval( "Jogador ",player )
+									escreval( "Digite a posição que deseja selcionar" )
+									leia( i )
 									
-										se linha = line[counter] entao
+									se ((i > 0) e (i < 10))  entao
+									
+										se ( (position[i] = "X" ) ou (position[i] = "O") ) entao
 										
-											row := counter
+											escreval( "Casa Ocupada!" )
+										
+										senao
+										
+											position[i] := player
+											controle := verdadeiro
 										
 										fimse
+										
+									senao
+										
+										escreval( "Posição Invalida!" );
 									
+									fimse
+									
+								ate controle
+								
+								controle := falso
+								contador := 0
+								
+								// condição de vitoria
+								
+								//{1,2,3}
+								//{4,5,6}
+								//{7,8,9}
+								para i de 1 ate 7 passo 3 faca
+								
+									para z de 0 ate 2 passo 1 faca 
+									
+										se position[i+z] = player entao
+										
+											contador := contador + 1
+											
+										fimse
+										
 									fimpara
 									
-									se table[row, colunm] = " " entao
+									se contador = 3 entao
 									
-										table[row, colunm] := player
-										interrompa
-									
+										controle := verdadeiro
+										
 									senao
 									
-										escreval("Posição já ocupada, por favor, selecione outra posição!")
+										contador := 0
 									
 									fimse
+									
+								fimpara
 								
-								ate falso
+								//{1,4,7}
+								//{2,5,8}
+								//{3,6,9}
+								para i de 1 ate 3 passo 1 faca
 								
-								// checar condição de vitória
-								
-								counter := 0
-								
-								// colunas
-								para colunm de 1 ate 3 passo 1 faca
-								
-									para row de 1 ate 3 passo 1 faca
+									para z de i ate 6+i passo 3 faca 
+									
+										se position[z] = player entao
 										
-										se table[ row, colunm] =  player entao
-										
-											counter := counter + 1
-										
+											contador := contador + 1
+											
 										fimse
-									
-									fimpara
-									
-									se counter = 3 entao
-									
-										exit := verdadeiro
 										
+									fimpara
+
+									se contador = 3 entao
+									
+										controle := verdadeiro
+										
+									senao
+									
+										contador := 0
+									
 									fimse
 									
-									counter := 0
-								
 								fimpara
 								
-								counter := 0
+								//{1,5,9}
+								//{3,5,7}
+								para z de 1 ate 3 passo 2 faca
 								
-								// linhas
-								para row de 1 ate 3 passo 1 faca
-								
-									para colunm de 1 ate 3 passo 1 faca
+									para i de z ate 10-z passo 5-z faca
+									
+										se position[i] = player entao
 										
-										se table[ row, colunm] =  player entao
-										
-											counter := counter + 1
-										
+											contador := contador + 1
+											
 										fimse
-									
-									fimpara
-									
-									se counter = 3 entao
-									
-										exit := verdadeiro
 										
-									fimse
+									fimpara
+								
+									se contador = 3 entao
 									
-									counter := 0
-								
-								fimpara
-								
-								// 1 to 3 colunm - 1 to 3 diagonal
-								counter := 0
-								
-								para row de 1 ate 3 passo 1 faca
-								
-									se table[ row, row] =  player entao
+										controle := verdadeiro
+										
+									senao
 									
-										counter := counter + 1
+										contador := 0
 									
 									fimse
 								
 								fimpara
 								
-								se counter = 3 entao
-								
-									exit := verdadeiro
-									
+								se controle entao
+
+									limpatela()
+									escreval( position[7] ," | ", position[8] ," | ", position[9] )
+									escreval( "-----------" )
+									escreval( position[4] ," | ", position[5] ," | ", position[6] )
+									escreval( "------------" )
+									escreval( position[1] ," | ", position[2] ," | ", position[3] )
+									escreval( "Jogador ",player," Venceu")
+
 								fimse
+
+								//fimcondição de vitoria
 								
-								// 3 to 1 colunm - 3 to 1 diagonal
-								counter := 0
-								
-								para row de 1 ate 3 passo 1 faca
-								
-									se table[ 4 - row, row] =  player entao
-									
-										counter := counter + 1
-									
-									fimse
-								
-								fimpara
-								
-								se counter = 3 entao
-								
-									exit := verdadeiro
-									
-								fimse
-								
+								// Empate
 								tie := tie + 1
 								
-								se nao( exit ) entao
+								se ((tie = 9) e nao(controle)) entao
 								
-									se tie >= 9 entao
-								
-										interrompa
-								
-									fimse
-								
-									se player = "O" entao
-								
-										player := "X"
-									
-									senao
-								
-										player := "O"
-								
-									fimse
+									controle := verdadeiro
+									escreval( "Empate!" )
 								
 								fimse
-								
-							ate exit
-
-							limpatela()
-							escreval( "  1   2   3" )
-							escreval( "A ", table[1,1] ," | ", table[1,2] ," | ", table[1,3] )
-							escreval( "-----------" )
-							escreval( "B ", table[2,1] ," | ", table[2,2] ," | ", table[2,3] )
-							escreval( "------------" )
-							escreval( "C ", table[3,1] ," | ", table[3,2] ," | ", table[3,3] )
 							
-							se exit entao
-							
-								escreval( "Jogador ", player, " venceu " )
-							
-							senao
-							
-								escreval( "Empate" )
-								
-							fimse
+							ate controle
 							
 							//! =====   FIM Tic-Tac-Toe
 						
 						caso "2"
 						
-							//! =====  INICIO Fatorial
+							//! =====  INICIO NumberSorting
 						
+							ammount := 0
+							escreval( "Digite até 10 números a serem ordenados")
+							escreval( "Ou digite um número invalido para ordenar os números já digitados")
+
+							para i de 1 ate 10 passo 1 faca
+
+								escreval( "Digite o ",i,"º número: " )
+								leia( input )
 								
+								// detectar se é numero valido
+								para z de 1 ate Compr( input ) passo 1 faca
+								
+									se Asc( input ) = 45 entao
+									
+										z := 2
+									
+									fimse
+								
+									tmp := Asc( Copia( input, z, 1 ) )
+									
+									se ( tmp < 48 ) ou ( tmp > 57 ) entao
+									
+										// Valor não numerico
+										i := 11
+									
+									fimse
+								
+								fimpara
+								
+								se i <> 11 entao
+								
+									list[i] := Caracpnum( input )
+									ammount := ammount + 1
+									
+								senao
+								
+									interrompa
+								
+								fimse
+
+							fimpara
+
+							se ammount > 1 entao
+
+								para i de 1 ate ammount passo 1 faca
+								
+									listOrdenada[i] := list[i]
+								
+								fimpara
+
+								para i de 1 ate ammount passo 1 faca
+								
+									index := i
+								
+									para z de i+1 ate ammount passo 1 faca
+									
+										se listOrdenada[index] > listOrdenada[z] entao
+										
+											index := z
+										
+										fimse
+									
+									fimpara
+									
+									tmp := listOrdenada[i]
+									listOrdenada[i] := listOrdenada[index]
+									listOrdenada[index] := tmp
+								
+								fimpara
+
+							fimse
+
+							escreval( "Números digitados: " )
+
+							para i de 1 ate ammount passo 1 faca
+
+								escreva( list[i],", " )
+
+							fimpara
+
+							escreval()
+							escreval( "Números digitados em Ordem: " )
+
+							para i de 1 ate ammount passo 1 faca
+
+								escreva( listOrdenada[i],", " )
+
+							fimpara
 							
-							//! =====  FIM Fatorial
+							
+							//! =====  FIM NumberSorting
 						
 						caso "3"
 						
-							//! =====  INICIO Somatoria 100 primeiros numeros
-						
-							//! =====  FIM Somatoria 100 primeiros numeros
+							//! =====  INICIO CPFcheck
+
+							escreval( "Digite seu CPF" )
+							leia( cpfChar )
+							
+							para i de 1 ate 11 passo 1 faca
+							
+								cpf[i] := Caracpnum( Copia( cpfChar, i, 1 ) )
+							
+							fimpara
+							
+							// verificar se todos os numeros são iguais
+							valid := 0
+							posit := 1
+							
+							para i de 2 ate 11 passo 1 faca
+							
+								se cpf[i] <> cpf[1] entao
+								
+									posit := 10
+									interrompa
+									
+								senao
+								
+									posit := posit + 1
+									
+								fimse
+							
+							fimpara
+							
+							enquanto posit <= 11 faca
+							
+								valid := 0
+							
+								para i de 1 ate posit - 1 passo 1 faca
+								
+									valid := valid + cpf[i] * ( posit + 1 - i)
+								
+								fimpara
+								
+								valid := 11 - ( valid % 11 )
+								
+								se valid = 10 entao
+								
+									valid := 0
+									
+								fimse
+
+								se valid = cpf[posit] entao
+
+									posit := posit + 1
+									
+									se posit > 11 entao
+									
+										escreval( "CPF Válido!" )
+									
+									fimse
+
+								senao
+
+									escreval( "CPF Inválido" )
+									interrompa
+
+								fimse
+								
+							fimenquanto
+							
+							//! =====  FIM CPFcheck
 						
 						outrocaso
 						
@@ -931,7 +1073,7 @@ inicio
 					
 						escreval("")
 						escreval("|         Selecione uma das opções                |")
-						escreval("|(1) Voltar para Submenu Laço de repetição REPITA |")
+						escreval("|(1) Voltar para Submenu Array                    |")
 						escreval("|(2) Voltar para menu principal                   |")
 						escreval("|(3) Sair do programa                             |")
 						

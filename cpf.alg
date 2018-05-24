@@ -14,34 +14,26 @@ inicio
 	
 	fimpara
 	
+	// verificar se todos os numeros são iguais
 	valid := 0
+	position := 1
 	
-	para position de 0 ate 9 passo 1 faca
+	para i de 2 ate 11 passo 1 faca
 	
-		para i de 1 ate 11 passo 1 faca
+		se cpf[i] <> cpf[1] entao
 		
-			se cpf[i] = position entao
-			
-				valid := valid + 1
-			
-			fimse
-		
-		fimpara
-		
-		se valid >= 11 entao
-		
-			position := 12
+			position := 10
 			interrompa
+			
+		senao
 		
+			position := position + 1
+			
 		fimse
 	
-		valid := 0
-		
 	fimpara
 	
-	//position := 10 se não entrar na condição de ter 11 caracteres iguais, o para position vai resultar em 10
-	
-	enquanto position > 11 faca
+	enquanto position <= 11 faca
 	
 		valid := 0
 	
