@@ -8,66 +8,80 @@ inicio
 	escreval( "Digite seu CPF" )
 	leia( cpfChar )
 	
-	para i de 1 ate 11 passo 1 faca
-	
-		cpf[i] := Caracpnum( Copia( cpfChar, i, 1 ) )
-	
-	fimpara
-	
-	// verificar se todos os numeros são iguais
-	valid := 0
-	position := 1
-	
-	para i de 2 ate 11 passo 1 faca
-	
-		se cpf[i] <> cpf[1] entao
+	se ( Compr( cpfChar ) = 11 ) entao
 		
-			position := 10
-			interrompa
-			
-		senao
+		para i de 1 ate 11 passo 1 faca
 		
-			position := position + 1
-			
-		fimse
-	
-	fimpara
-	
-	enquanto position <= 11 faca
-	
-		valid := 0
-	
-		para i de 1 ate position - 1 passo 1 faca
-		
-			valid := valid + cpf[i] * ( position + 1 - i)
+			cpf[i] := Caracpnum( Copia( cpfChar, i, 1 ) )
 		
 		fimpara
 		
-		valid := 11 - ( valid % 11 )
+		// verificar se todos os numeros são iguais
+		valid := 0
+		position := 2
 		
-		se valid = 10 entao
+		para i de 2 ate 11 passo 1 faca
+		
+			se cpf[i] <> cpf[1] entao
+			
+				position := 10
+				interrompa
+				
+			senao
+			
+				position := position + 1
+				
+			fimse
+		
+		fimpara
+		
+		se position = 12 entao
+		
+			escreval("CPF inválido")
+		
+		fimse
+		
+		enquanto position <= 11 faca
 		
 			valid := 0
+		
+			para i de 1 ate position - 1 passo 1 faca
 			
-		fimse
-
-		se valid = cpf[position] entao
-
-			position := position + 1
+				valid := valid + cpf[i] * ( position + 1 - i)
 			
-			se position > 11 entao
+			fimpara
 			
-				escreval( "CPF Válido!" )
+			valid := 11 - ( valid % 11 )
 			
+			se valid = 10 entao
+			
+				valid := 0
+				
 			fimse
 
-		senao
+			se valid = cpf[position] entao
 
-			escreval( "CPF Inválido" )
-			interrompa
+				position := position + 1
+				
+				se position > 11 entao
+				
+					escreval( "CPF Válido!" )
+				
+				fimse
 
-		fimse
+			senao
+
+				escreval( "CPF Inválido" )
+				interrompa
+
+			fimse
+			
+		fimenquanto
 		
-	fimenquanto
+	senao
+	
+		escreval( "CPF inválido, deve possuir exatamente 11 números" )
+	
+	fimse
 	
 fimalgoritmo
