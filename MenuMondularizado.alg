@@ -1,5 +1,14 @@
 Algoritmo "TrabalhoAvaliativo"
-// Versao 1 - Menu Principal
+// Versao 3 - Menu Principal
+/*
+
+	Trabalho da disciplina algoritimo e estrutura de dads somente por e-mail
+	marcelo.davi@ifpr.edu.br
+	Data maxima da entrega 11/09
+	// tirar parametros
+
+*/
+
 Var
 	OpcaoPrincipal: caractere
 	RodaPrograma: caractere
@@ -8,6 +17,23 @@ Var
 	
 	
 	// ====================  INICIO FUNÇÕES UTIL
+
+funcao lerNum(): inteiro
+var
+	input : caractere 
+	index : inteiro
+	char : caractere
+inicio
+	
+	repita
+	
+		leia( input )
+		
+		
+	
+	ate( falso )
+
+fimfuncao
 	
 funcao repeatChar( char: caractere; ammount: inteiro ) : caractere
 var
