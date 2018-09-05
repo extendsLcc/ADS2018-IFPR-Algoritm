@@ -13,8 +13,6 @@ Var
     // charLoop()
         charAmmount: inteiro
         whichChar: caractere
-    // separator
-        lineSize: inteiro
 
 //! INIT UTIL FUNCTIONS
 
@@ -150,7 +148,7 @@ Var
 inicio
 
     whichChar := "="
-    charAmmount := lineSize
+    charAmmount := targetSize
     whichString := charLoop()
     escreval( formatMenuTxt() )
 
@@ -226,9 +224,8 @@ inicio
 
     // Impresão dos itens do menu
 
-    lineSize := size
-    separator()
     targetSize := size
+    separator()
     whichString := formatedMenu[1]
     escreval( formatMenuTxt() )
     separator()
@@ -658,8 +655,8 @@ inicio
 
     menu[1] := "MENU Vetor/Matriz"
     menu[2] := "Digito Agencia"
-    menu[3] := "Fatorial"
-    menu[4] := "Somatoria 100 primeiros numeros"
+    menu[3] := "Validar CPF"
+    menu[4] := "Jogo da Velha"
     menu[5] := "Voltar ao menu Principal"
     menuSize := 5
     printMenu()
