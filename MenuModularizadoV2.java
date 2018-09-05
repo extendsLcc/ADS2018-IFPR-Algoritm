@@ -2,20 +2,28 @@ Algoritmo "TrabalhoMenuModularizado"
 // Autor : Lucas da Cruz Cunha
 // Data : 29/08/2018
 Var
-    loopBack: logico
+    // Variavel utilizada para controlar o fim da execução do programa. Como existe a possibilidade de sair do programa
+    // de varios pontos ( Menu principal, sub menu e menu de retorno ), é necessario que esta variavel seje global.
+    exitMenu: logico
+    // Vetor utilizado para "parametrizar" texto das opções dos menus. 
 	menu: vetor [1..10] de caractere
+    // Variavel utilizada para identificar a quantidade de opções "parametrizada" pela variavel 'menu'
     menuSize: inteiro
 
-    // subistitutos parametros
-    // FormatMenuTxt
-        whichString: caractere
-        targetSize: inteiro
-    // charLoop()
-        charAmmount: inteiro
-        whichChar: caractere
+    // Dada a restrição do trabalho de não utilizar funções e procedimentos que utilizem passagem de parametros
+    // as variáveis abaixo foram criadas para contornar essa limitação sendo usadas como substitutas de parametros
+    // de suas respectivas funções sinalizadas no comentario anterior as mesmas.
+        // subistitutos parametros
+        // FormatMenuTxt
+            whichString: caractere
+            targetSize: inteiro
+        // charLoop()
+            charAmmount: inteiro
+            whichChar: caractere
 
 //! INIT UTIL FUNCTIONS
 
+    // Requisita input do usuário até que o mesmo digite um valor númerico e retorna o valor inteiro do número digitado.
 funcao getInt():inteiro
 Var
 inicio
@@ -25,7 +33,11 @@ inicio
 fimfuncao
     
 
-    // Requisitar input do usurio até que ele digite um valor númerico
+    // Requisita input do usuário até que o mesmo digite um valor númerico.
+    // #Lógica: Continuar requisitando input do usuário até que o mesmo digite uma String com 1 ou mais
+    // caracteres, aonde o número ASCII de todos os caracteres da String esteja entre 48 e 57 ( 0-9 ) com
+    // exceção do primeiro caractere que pode ser o simbolo "-" para representar número negativo e apenas
+    // uma ocorrencia do simbolo "." em toda a String para representar números decimais.
 funcao getReal():real
 Var
     start, index, charAsc: inteiro
@@ -55,7 +67,6 @@ inicio
 
             para index de start ate Compr( input ) passo 1 faca
 
-            
                 charAsc := Asc( Copia( input, index, 1 ) )
 
                 // Considerando casa decimal
@@ -97,6 +108,7 @@ inicio
 
 fimfuncao
 
+    // Imprime a mensagem de requisição de input do usuario, requisita e retorna a opção selecionada pelo usuário.
 funcao getSelectedOption(): inteiro
 Var
 inicio
@@ -106,6 +118,7 @@ inicio
 
 fimfuncao
 
+    // Imprime Mensagem de erro padrão sobre opção inválida do menu 
 procedimento errorOpt
 Var
 inicio
@@ -114,6 +127,8 @@ inicio
 
 fimprocedimento
 
+    // Retorna a String @whichChar repetida por @charAmmount vezes.
+    // EX:   whichChar := "$" charAmmount := 5  charLoop() -> "$$$$$" 
 funcao charLoop(): caractere
 Var
     i: inteiro
@@ -132,6 +147,8 @@ inicio
 
 fimfuncao
 
+    // Preenche o lado direito da @whichString por espaços (" ") de maneira que o tamanho total de @whichString + espaços seja @targetSize
+    // e retorna @whichString + espaços * @targetSize envoltos de "|".
 funcao formatMenuTxt(): caractere
 Var
 inicio
@@ -143,6 +160,7 @@ inicio
 
 fimfuncao
 
+    // Imprime o caractere "=" por @targetSize vezes, envolto de caracteres "|".
 procedimento separator
 Var
 inicio
@@ -154,7 +172,7 @@ inicio
 
 fimprocedimento
 
-
+    // Limpa a tela do console e chama procedimento de imprimir texto do Menu.
 procedimento printMenuCls
 var
 inicio
@@ -164,7 +182,13 @@ inicio
 
 fimprocedimento
 
-    // Formatar e imprimir menu baseado nos valores do array menu
+    // Formatar e imprimir menu baseado nos valores do array @menu e @menuSize
+    // Primeiro indice @menu sempre sera considerado o titulo do menu e sera centralizado acordo com a maior String
+    // encontrada entre os valores em @menu de 1 até @menuSize.
+    // Pega os valores a partir do segundo indice do vetor @menu até o indice @menuSize e enumera-os como opções
+    // do menu. Além de formata-los de maneira que as bordas do menu fiquem simétricas de acordo com a maior String
+    // encontrada entre as opções.
+    // A ultima opção sempre sera considerado como alternativa de retorno/saida, sendo númerada com "(0)"
 procedimento printMenu
 Var
     i , size : inteiro
@@ -210,6 +234,7 @@ inicio
 
 
     // Correção para centralizar titulo com tamanho impar
+    // Caso for impar, @center possuira um valor real
     se Int( center ) <> center entao
 
         center := center + 1
@@ -245,12 +270,15 @@ fimprocedimento
 
 //! INIT MENU MANAGEMENT
 
+    // Gerencia o controle de impressão e seleção do menu principal.
 procedimento showMainMenu
 Var
+    // @showMenu: utilizado no controle da impressão do texto do menu em caso de seleção de opção inválida.
     showMenu: logico
     selectedOption: inteiro
 inicio
 
+    // Definir @showMenu como verdadeiro, pois sempre que o procedimento for chamado, o texto do menu sera imprimido.
     showMenu := verdadeiro
 
     repita
@@ -269,7 +297,7 @@ inicio
             caso 0
 
                 // Fechar
-                loopBack := verdadeiro
+                exitMenu := verdadeiro
 
             caso 1
 
@@ -298,10 +326,11 @@ inicio
 
         fimescolha
 
-    ate(loopBack)
+    ate(exitMenu)
 
 fimprocedimento
 
+    // Define Texto a ser imprimido do menu principal e imprime o mesmo formatado.
 procedimento printMainMenu
 Var
 inicio
@@ -318,8 +347,11 @@ inicio
 
 fimprocedimento
 
+    // Gerencia o controle de impressão e seleção do menu de seleção.
 procedimento showMenuSelecao
 Var
+    // @showMenu: utilizado no controle da impressão do texto do menu e na chamada do menu de retorno
+    // em caso de seleção de opção inválida do menu atual ou seleção da opção de retorno de menu.
     showMenu: logico
     selectedOption: inteiro
 inicio
@@ -363,12 +395,15 @@ inicio
 
         fimescolha
 
+        // Caso o usuário não tenha escolhido a opção de retorno/saida ou uma opção inválida, mostrar menu de retorno.
         se showMenu entao
 
             selectedOption := returnMenu()
 
         fimse
 
+        // Caso a opção 0 for selecionada, retorne ao menu anterior sem imprimir o menu de retorno
+        // Caso a opção selecionada no menu de retorno (Leia $returnMenu ) for 2, retorne ao menu anterior.
     ate( selectedOption = 0 ) ou ( selectedOption = 2 )
 
 fimprocedimento
@@ -685,7 +720,7 @@ inicio
 
             caso 0
 
-                loopBack := verdadeiro
+                exitMenu := verdadeiro
 
             caso 1
                 //Nada
@@ -1290,13 +1325,13 @@ fimfuncao
 	
 inicio
 	
-    loopBack := falso
+    exitMenu := falso
 	
 	repita
 
         showMainMenu()
 	  
-	ate ( loopBack )
+	ate ( exitMenu )
 	
 	escreval("Obrigado por utilizar nossos produtos!")
 	escreval("Organizacoes Tabajara")
